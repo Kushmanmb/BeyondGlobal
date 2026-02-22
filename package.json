@@ -1,15 +1,9 @@
 {
-  "name": "metamask-smart-accounts-kit-demo",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/Kushmanmb/sturdy-funicular",
-  "author": "Kushmanmb",
-  "license": "SEE LICENSE IN LICENSE",
   "name": "sturdy-funicular",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/Kushmanmb/sturdy-funicular",
-  "author": "copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>",
+  "author": "Kushmanmb",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "start": "node index.js",
