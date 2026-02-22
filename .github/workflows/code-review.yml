@@ -73,6 +73,8 @@ jobs:
   code-quality:
     name: Code Quality and Linting
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout code
@@ -120,6 +122,8 @@ jobs:
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout code
@@ -152,6 +156,8 @@ jobs:
   policy-compliance:
     name: Policy Compliance
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout code
@@ -229,6 +235,8 @@ jobs:
   documentation:
     name: Documentation Check
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout code
@@ -286,6 +294,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [dependency-security, code-quality, build-and-test, policy-compliance, documentation]
     if: always()
+    permissions:
+      contents: read
     
     steps:
       - name: Check results
