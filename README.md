@@ -1,12 +1,67 @@
-# sturdy-funicular
+# BeyondGlobal - Bitcoin & MetaMask Smart Accounts Integration
 
-## Advanced Git Commands Guide
+This repository integrates MetaMask Smart Accounts Kit with Bitcoin-related workflows, monitoring, and scaling capabilities using self-hosted runners and validators.
 
-This guide covers advanced Git commands that are essential for effective version control management. Each command includes detailed explanations and practical examples.
+## Features
+
+- 🔗 **Etherscan API Integration**: Query blockchain data for smart account verification
+- ₿ **Bitcoin Workflows**: Comprehensive GitHub Actions workflows for Bitcoin development
+- 📊 **Transaction Monitoring**: Automated Bitcoin transaction monitoring (every 15 minutes)
+- 🚀 **Scalability Testing**: Performance testing at small, medium, and large scales
+- 📝 **Bitcoin Improvement Proposals**: BIP validation and management system
+- 🔐 **Self-Hosted Runners**: Dedicated Bitcoin validators for secure workflows
+- ⚡ **Bitcoin Unlimited Support**: Compatible with Bitcoin Unlimited scaling improvements
 
 ---
 
-## Table of Contents
+## Quick Start
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Kushmanmb/BeyondGlobal.git
+cd BeyondGlobal
+
+# Install dependencies
+yarn install
+
+# Run tests
+yarn test
+
+# Query Etherscan API
+yarn start
+```
+
+### Running Bitcoin Workflows
+
+All Bitcoin-related workflows are located in `.github/workflows/` and use self-hosted runners with the `bitcoin-validator` label.
+
+**Available workflows:**
+- `bitcoin-validator.yml` - Validates Bitcoin integration and network connectivity
+- `bitcoin-improvement-proposal.yml` - Validates and reviews BIPs
+- `bitcoin-transaction-monitor.yml` - Monitors Bitcoin transactions
+- `bitcoin-scaling.yml` - Tests scaling at various levels
+- `bitcoin-work-management.yml` - Manages Bitcoin-related work items
+
+See [BITCOIN_WORKFLOWS.md](BITCOIN_WORKFLOWS.md) for detailed documentation.
+
+---
+
+## Documentation
+
+- [Bitcoin Workflows Documentation](BITCOIN_WORKFLOWS.md) - Complete guide to all workflows and self-hosted runner setup
+- [Bitcoin Improvement Proposals](PROPOSALS.md) - BIP process and active proposals
+- [Etherscan API Documentation](ETHERSCAN_API.md) - API integration details
+- [Cherry Pick Demo](cherry-pick-demo.md) - Git workflow examples
+
+---
+
+## Advanced Git Commands Guide
+
+This section covers advanced Git commands that are essential for effective version control management. Each command includes detailed explanations and practical examples.
+
+### Table of Contents
 
 1. [git stash](#git-stash)
 2. [git cherry-pick](#git-cherry-pick)
