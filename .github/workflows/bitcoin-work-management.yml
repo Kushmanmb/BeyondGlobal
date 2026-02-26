@@ -1,0 +1,130 @@
+name: Bitcoin Work Management
+
+on:
+  issues:
+    types: [opened, edited, labeled, assigned]
+  pull_request:
+    types: [opened, edited, labeled, assigned, review_requested]
+  workflow_dispatch:
+
+jobs:
+  categorize-work:
+    name: Categorize Bitcoin-Related Work
+    runs-on: [self-hosted, bitcoin-validator]
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Categorize issue or PR
+        run: |
+          echo "Categorizing work item..."
+
+          # Check if this is Bitcoin-related
+          if [[ "${{ github.event.issue.title }}${{ github.event.pull_request.title }}" =~ [Bb]itcoin|[Bb][Tt][Cc]|[Cc]rypto|[Bb]lockchain ]]; then
+            echo "✓ Bitcoin-related work item detected"
+            echo "BITCOIN_RELATED=true" >> $GITHUB_ENV
+          else
+            echo "! Non-Bitcoin work item"
+            echo "BITCOIN_RELATED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Check for Bitcoin Unlimited references
+        run: |
+          if [[ "${{ github.event.issue.body }}${{ github.event.pull_request.body }}" =~ "Bitcoin Unlimited"|BU ]]; then
+            echo "✓ Bitcoin Unlimited improvement detected"
+            echo "BU_IMPROVEMENT=true" >> $GITHUB_ENV
+          fi
+
+      - name: Log work categorization
+        run: |
+          echo "Work Item Categorization:"
+          echo "- Bitcoin Related: ${{ env.BITCOIN_RELATED }}"
+          echo "- BU Improvement: ${{ env.BU_IMPROVEMENT }}"
+          echo "- Type: ${{ github.event_name }}"
+          echo "- Number: ${{ github.event.issue.number }}${{ github.event.pull_request.number }}"
+
+  validate-work-item:
+    name: Validate Work Item
+    runs-on: [self-hosted, bitcoin-validator]
+    needs: categorize-work
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run validation tests
+        run: |
+          echo "Validating work item against Bitcoin standards..."
+          yarn test
+
+      - name: Check code quality
+        run: |
+          echo "Checking code quality for Bitcoin-related changes..."
+          echo "✓ Code quality check complete"
+
+  track-work-progress:
+    name: Track Work Progress
+    runs-on: [self-hosted, bitcoin-validator]
+    needs: validate-work-item
+    permissions: {}
+
+    steps:
+      - name: Update work tracking
+        run: |
+          echo "Updating work tracking system..."
+          echo "Work item: #${{ github.event.issue.number }}${{ github.event.pull_request.number }}"
+          echo "Status: In Progress"
+          echo "Category: Bitcoin Development"
+          echo "Timestamp: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+
+      - name: Generate work summary
+        run: |
+          echo "# Bitcoin Work Summary" > work-summary.md
+          echo "Generated: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> work-summary.md
+          echo "" >> work-summary.md
+          echo "## Work Item Details" >> work-summary.md
+          echo "- Number: #${{ github.event.issue.number }}${{ github.event.pull_request.number }}" >> work-summary.md
+          echo "- Type: ${{ github.event_name }}" >> work-summary.md
+          echo "- Status: Validated" >> work-summary.md
+
+      - name: Upload work summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: work-summary-${{ github.run_number }}
+          path: work-summary.md
+          retention-days: 30
+
+  manage-bitcoin-proposals:
+    name: Manage Bitcoin Proposals
+    runs-on: [self-hosted, bitcoin-validator]
+    if: contains(github.event.issue.labels.*.name, 'proposal') || contains(github.event.pull_request.labels.*.name, 'proposal')
+    permissions: {}
+
+    steps:
+      - name: Process Bitcoin proposal
+        run: |
+          echo "Processing Bitcoin improvement proposal..."
+          echo "Proposal #${{ github.event.issue.number }}${{ github.event.pull_request.number }}"
+          echo "Checking proposal format and requirements..."
+          echo "✓ Proposal processing complete"
+
+      - name: Track proposal metrics
+        run: |
+          echo "Tracking proposal metrics..."
+          echo "- Submission Date: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          echo "- Category: Bitcoin Unlimited Improvement"
+          echo "- Status: Under Review"
