@@ -1,4 +1,4 @@
-# sturdy-funicular
+# BeyondGlobal
 
 ## Advanced Git Commands Guide
 
