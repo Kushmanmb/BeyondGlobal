@@ -6,8 +6,11 @@
   "author": "Matthew Brace",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
-    "start": "node index.js",
+    "start": "node infrastructure.js",
     "query-etherscan": "node index.js",
+    "test": "node test.js && node infrastructure-test.js",
+    "test:infrastructure": "node infrastructure-test.js",
+    "test:etherscan": "node test.js"
     "chat": "node github-ai-chat.js",
     "test": "node test.js"
   },
