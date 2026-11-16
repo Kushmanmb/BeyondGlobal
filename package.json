@@ -1,24 +1,21 @@
 {
-  "name": "metamask-smart-accounts-kit-demo",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/Kushmanmb/sturdy-funicular",
-  "author": "Kushmanmb",
-  "license": "MIT",
   "name": "sturdy-funicular",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/Kushmanmb/sturdy-funicular",
-  "author": "copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>",
-  "license": "MIT",
+  "author": "Matthew Brace",
+  "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "start": "node infrastructure.js",
     "query-etherscan": "node index.js",
     "test": "node test.js && node infrastructure-test.js",
     "test:infrastructure": "node infrastructure-test.js",
     "test:etherscan": "node test.js"
+    "chat": "node github-ai-chat.js",
+    "test": "node test.js"
   },
   "dependencies": {
-    "@metamask/smart-accounts-kit": "^0.3.0"
+    "@metamask/smart-accounts-kit": "^0.3.0",
+    "openai": "^6.33.0"
   }
 }
